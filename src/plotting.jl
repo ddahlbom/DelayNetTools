@@ -9,6 +9,12 @@ function spikeraster(spikes::Array{Spike,1}; kwargs...)
 end
 
 
+function spikeraster(fig::T, spikes::Array{Spike,1}; kwargs...) where 
+                     {T <: Union{Figure, AbstractPlotting.FigurePosition}}
+    points = [Point2f0(s.t, s.n) for s ∈ spikes]
+    scatter(fig, points; kwargs...)
+end
+
 # spikeraster(spikes::Array{Spike,1}; kwargs...) = spikeraster(Scene(), spikes; kwargs...)
 
 

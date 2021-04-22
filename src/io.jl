@@ -94,7 +94,7 @@ function writeinput(input::Array{Spike,1}, weights::Array{Float64,1}, trialname)
 			write(f,spike.n-1)
 			write(f,spike.t)
 		end
-        for weight ∈ weight
+        for weight ∈ weights
             write(f,weight)
         end
 	end
@@ -127,6 +127,7 @@ function writeinput(inputs::Array{Array{Spike,1},1}, trialname; weight=18.0)
 				write(f,spike.t)
 			end
             for _ ∈ 1:length(input)
+                # println(weight)
                 write(f,weight)
             end
 		end
@@ -176,7 +177,7 @@ function writesyngraph(graph::Array{Float64,2}, trialname)
 	open(trialname * "_syngraph.bin", "w") do f
 		n = size(graph)[1]
 		graphraw = reshape(graph', (n*n,))
-		write(f, Int64(n)) 	# write an Int64 (long int)
+		write(f, Int64(n*n)) 	# write an Int64 (long int)
 		write(f, graphraw) 			
 	end
 end

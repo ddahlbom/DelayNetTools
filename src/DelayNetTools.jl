@@ -1,6 +1,6 @@
 module DelayNetTools
 
-using Random, GLMakie
+using Random, GLMakie, AbstractPlotting
 
 include("types.jl")
 export Spike, Synapse, Neuron, SimpleNeuronType, SimpleNeuron, SRMNeuron, DelayLine

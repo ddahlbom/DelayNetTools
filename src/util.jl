@@ -22,6 +22,7 @@ function runexperiment(::ExperimentType{:new}, name::AbstractString,
 					   m::Model,
 					   tp::TrialParams, input; weights=:none,
 					   numprocs = 8, execloc="./")
+    println("dispatched here.")
 	writemparams(m.params, name)
 	writedelgraph(m.delgraph, name)
 	writesyngraph(m.syngraph, name)
@@ -30,6 +31,7 @@ function runexperiment(::ExperimentType{:new}, name::AbstractString,
     if weights == :none
 	    writeinput(input, name)
     elseif typeof(weights) <: Number
+        println("and, again, here")
         writeinput(input, name; weight=weights)
     else
         writeinput(input, weights, name)
