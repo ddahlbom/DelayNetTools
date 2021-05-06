@@ -141,6 +141,7 @@ struct TrialParams
 	randspikesize::Float64
 	randinput::Bool
 	inhibition::Bool
+    stdp::Bool
 	inputmode::UInt64
 	multiinputmode::UInt64
 	inputweight::Float64
@@ -150,7 +151,7 @@ struct TrialParams
 	inputrefractorytime::Float64
 end
 
-TrialParams() = TrialParams(1.0, 3.0, 20.0, 1, 1, 1, 1, 20.0, 0.0, 1.0, 0.5, 0.0)
+TrialParams() = TrialParams(1.0, 3.0, 20.0, 1, 1, 1, 1, 1, 20.0, 0.0, 1.0, 0.5, 0.0)
 
 function Base.show(io::IO, tp::TrialParams)
 	println(io, "\tInput mode: $(tp.inputmode == 1 ? "periodic" : "poissonian")")
@@ -161,6 +162,7 @@ function Base.show(io::IO, tp::TrialParams)
 	println(io, "\tRand spike density (λ): $(tp.lambda) (1/s)")
 	println(io, "\tRandom spike size: $(tp.randspikesize)")
 	println(io, "\tInhibition: $(tp.inhibition)")
+	println(io, "\tSTDP: $(tp.stdp)")
 	println(io, "\tRecord start: $(tp.recordstart)")
 	println(io, "\tRecord stop: $(tp.recordstop)")
 end

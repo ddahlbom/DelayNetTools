@@ -23,14 +23,10 @@ end
 ################################################################################
 
 function spatialplot(neurontypes, positions, colors::Dict{SimpleNeuronType,Any}; 
-                     size = 5.0, scale=1.0,
-                     kwargs...)
-    positions = [p .* scale for p ∈ positions]
-    scene = Scene()
-    colors = [colors[neurontypes[i]] for i ∈ 1:length(neurontypes)]
-    scatter!(scene, positions;
-             markersize=size, color=colors, kwargs...)
-    scene
+                     markersize = 5.0, markeralpha=1.0, kwargs...)
+    positions = [p for p ∈ positions]
+    colors = [(colors[neurontypes[i]],markeralpha) for i ∈ 1:length(neurontypes)]
+    scatter(positions; markersize, color=colors, kwargs...)
 end
 
 
@@ -39,14 +35,14 @@ function spatialplot(neurontypes, positions, colors::Dict{SimpleNeuronType,Any},
                      firedcolor = :red,
                      firedalpha = 0.5,
                      firedsize = 7.5,
+                     markersize = 10.0,
+                     markeralpha = 1.0,
                      kwargs...)
-    scene = spatialplot(neurontypes, positions, colors; kwargs...)
-    if haskey(kwargs, :scale)
-        positions = [p .* kwargs[:scale] for p ∈ positions]
-    end
-    scatter!(scene, [positions[i] for i ∈ firedidcs];
-             color=(firedcolor, firedalpha), markersize=firedsize)
-    scene
+    sc = spatialplot(neurontypes, positions, colors;
+                     markersize, markeralpha, kwargs...)
+    scatter!([positions[i] for i ∈ firedidcs];
+             color=(firedcolor, firedalpha), markersize=firedsize, strokewidth=0.0)
+    sc 
 end
 
 function spatialplot(neurontypes, positions, color::Dict{SimpleNeuronType,Any},

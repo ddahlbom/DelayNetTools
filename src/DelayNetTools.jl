@@ -1,6 +1,7 @@
 module DelayNetTools
 
-using Random, GLMakie, AbstractPlotting
+using Random
+# GLMakie, AbstractPlotting
 
 include("types.jl")
 export Spike, Synapse, Neuron, SimpleNeuronType, SimpleNeuron, SRMNeuron, DelayLine
@@ -32,10 +33,7 @@ export runexperiment, stageexperiment, pgsearch
 include("analysis.jl")
 export populationrate, populationpst, imagefromspikes
 export sparseac, denseac, densehalfac, corranalysis
-export pstspikes#, psthistograms
-
-include("plotting.jl")
-export spikeraster, spatialplot, spatialanim 
+export pstspikes #, psthistograms
 
 include("delayml.jl")
 export trainclassifier, test, trainmulticlassifier, testmulti
